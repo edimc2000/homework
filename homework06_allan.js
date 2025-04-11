@@ -13,6 +13,7 @@ noSpace("Tech Global") -> "TechGlobal"
 
 const noSpace = string => string.split(" ").filter(e => /[^ ]/.test(e)).join("");
 
+
 const strings1 = ["", "Javascript", " Hello ", " Hello World ", "Tech Global"];
 strings1.forEach(x => console.log(`noSpace("${x}") -> "${noSpace(x)}"`));
 
@@ -300,5 +301,15 @@ function mostRepeated(array) {
         if(value === counterObject[key]) return key;
     }
 }
-const array1 = [[4, 7, 4, 4, 4, 23, 23, 23], ["pen", "pencil", "pen", "123", "abc", "pen", "pencil"], [10], ["TechGlobal"]];
+let array1 = [[4, 7, 4, 4, 4, 23, 23, 23], ["pen", "pencil", "pen", "123", "abc", "pen", "pencil"], [10], ["TechGlobal"], ];
 array1.forEach(e => console.log(`mostRepeated([${e}]) -> ${mostRepeated(e)}`));
+
+// alternate solution
+console.log('--- solution 2 ---')
+const mostRepeated2 = arr => {
+    const uniqueArr = [... new Set(arr)];
+    let ctrUniqueArr = uniqueArr.map(e => arr.reduce( (acc, curr) => curr === e? acc + 1: acc, 0));
+    return  uniqueArr[ctrUniqueArr.indexOf(Math.max(... ctrUniqueArr))];
+}
+array1 = [[4, 7, 4, 4, 4, 23, 23, 23], ["pen", "pencil", "pen", "123", "abc", "pen", "pencil"], [10], ["TechGlobal"], [1,1,2,2,2,2]];
+array1.forEach(e => console.log(`mostRepeated2([${e}]) -> ${mostRepeated2(e)}`));
